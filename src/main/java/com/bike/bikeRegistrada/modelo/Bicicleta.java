@@ -1,11 +1,21 @@
 package com.bike.bikeRegistrada.modelo;
 
-import java.time.LocalDateTime;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
+import org.springframework.data.annotation.Id;
+
+
+@Entity
 public class Bicicleta {
 	
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
-	private LocalDateTime ano;
+	private String ano;
+	
+	@Enumerated
 	private StatusBicicleta status;
 	private Usuario usuario;
 	private Marca marca;
@@ -13,7 +23,7 @@ public class Bicicleta {
 	
 	
 	
-	public Bicicleta(Long codigo, LocalDateTime ano, StatusBicicleta status, Usuario usuario, Marca marca,
+	public Bicicleta(Long codigo, String ano, StatusBicicleta status, Usuario usuario, Marca marca,
 			Modelo modelo) {
 		this.codigo = codigo;
 		this.ano = ano;
@@ -26,7 +36,7 @@ public class Bicicleta {
 	public Long getCodigo() {
 		return codigo;
 	}
-	public LocalDateTime getAno() {
+	public String getAno() {
 		return ano;
 	}
 	public StatusBicicleta getStatus() {
@@ -40,6 +50,10 @@ public class Bicicleta {
 	}
 	public Modelo getModelo() {
 		return modelo;
+	}
+
+	public void setStatus(StatusBicicleta status) {
+		this.status = status;
 	}
 	
 	
