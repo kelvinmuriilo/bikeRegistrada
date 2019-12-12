@@ -2,49 +2,44 @@ package com.bike.bikeRegistrada.modelo;
 
 import java.util.List;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 
 import org.springframework.data.annotation.Id;
 
-@Entity
-public class Marca {
+public class Cidade {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private int id;
 	private String descricao;
+	private String sigla;
 	
-	@OneToMany(mappedBy = "marca")
-	private List<Modelo> modelos;
+	@OneToMany(mappedBy = "bairro")
+	private List<Bairro> bairros;
 	
-	@OneToMany(mappedBy = "marca")
-	private List<Bicicleta> bicicletas;
-
-	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 	public String getDescricao() {
 		return descricao;
 	}
-	public List<Modelo> getModelos() {
-		return modelos;
+	public String getSigla() {
+		return sigla;
 	}
 	
-	public List<Bicicleta> getBicicletas() {
-		return bicicletas;
+	public List<Bairro> getBairros() {
+		return bairros;
 	}
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((bicicletas == null) ? 0 : bicicletas.hashCode());
+		result = prime * result + ((bairros == null) ? 0 : bairros.hashCode());
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((modelos == null) ? 0 : modelos.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((sigla == null) ? 0 : sigla.hashCode());
 		return result;
 	}
 	
@@ -56,30 +51,26 @@ public class Marca {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Marca other = (Marca) obj;
-		if (bicicletas == null) {
-			if (other.bicicletas != null)
+		Cidade other = (Cidade) obj;
+		if (bairros == null) {
+			if (other.bairros != null)
 				return false;
-		} else if (!bicicletas.equals(other.bicicletas))
+		} else if (!bairros.equals(other.bairros))
 			return false;
 		if (descricao == null) {
 			if (other.descricao != null)
 				return false;
 		} else if (!descricao.equals(other.descricao))
 			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
+		if (id != other.id)
 			return false;
-		if (modelos == null) {
-			if (other.modelos != null)
+		if (sigla == null) {
+			if (other.sigla != null)
 				return false;
-		} else if (!modelos.equals(other.modelos))
+		} else if (!sigla.equals(other.sigla))
 			return false;
 		return true;
 	}
-	
 	
 	
 }

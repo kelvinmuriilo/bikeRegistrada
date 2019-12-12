@@ -3,9 +3,11 @@ package com.bike.bikeRegistrada.modelo;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
 
 import org.springframework.data.annotation.Id;
 
@@ -16,14 +18,32 @@ public class Ocorrencia {
 	private Long id;
 	private String titulo;
 	private String descricao;
-	private LocalDateTime dataOcorrencia;
-	private String cidade;
-	private String bairro;
+	private LocalDateTime dataRegistroOcorrencia;
+	private LocalDateTime dataDoFato;
 	
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private TipoOcorrencia tipo;
+		
+	@ManyToOne
+	private Cidade cidade;
+	
+	@ManyToOne
+	private Bairro bairro;
+	
+	@ManyToOne
 	private Bicicleta bicicleta;
+	
+	@ManyToOne
 	private Usuario usuario;
+	
+	public Ocorrencia(Long id, String titulo, String descricao, LocalDateTime dataOcorrencia, 
+			Cidade cidade, Bairro bairro, LocalDateTime dataDoFato) {
+		this.id = id;
+		this.titulo = titulo;
+		this.descricao = descricao;
+		this.dataDoFato = dataDoFato;
+		this.dataRegistroOcorrencia = LocalDateTime.now();
+	}
 	
 	public Long getId() {
 		return id;
@@ -35,12 +55,12 @@ public class Ocorrencia {
 		return descricao;
 	}
 	public LocalDateTime getDataOcorrencia() {
-		return dataOcorrencia;
+		return dataRegistroOcorrencia;
 	}
-	public String getCidade() {
+	public Cidade getCidade() {
 		return cidade;
 	}
-	public String getBairro() {
+	public Bairro getBairro() {
 		return bairro;
 	}
 	public TipoOcorrencia getTipo() {
@@ -53,6 +73,14 @@ public class Ocorrencia {
 		return usuario;
 	}
 	
+	public LocalDateTime getDataDoFato() {
+		return dataDoFato;
+	}
+	
+	public void setDataDoFato(LocalDateTime dataDoFato) {
+		this.dataDoFato = dataDoFato;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -60,7 +88,8 @@ public class Ocorrencia {
 		result = prime * result + ((bairro == null) ? 0 : bairro.hashCode());
 		result = prime * result + ((bicicleta == null) ? 0 : bicicleta.hashCode());
 		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
-		result = prime * result + ((dataOcorrencia == null) ? 0 : dataOcorrencia.hashCode());
+		result = prime * result + ((dataDoFato == null) ? 0 : dataDoFato.hashCode());
+		result = prime * result + ((dataRegistroOcorrencia == null) ? 0 : dataRegistroOcorrencia.hashCode());
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
@@ -68,7 +97,7 @@ public class Ocorrencia {
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -93,10 +122,15 @@ public class Ocorrencia {
 				return false;
 		} else if (!cidade.equals(other.cidade))
 			return false;
-		if (dataOcorrencia == null) {
-			if (other.dataOcorrencia != null)
+		if (dataDoFato == null) {
+			if (other.dataDoFato != null)
 				return false;
-		} else if (!dataOcorrencia.equals(other.dataOcorrencia))
+		} else if (!dataDoFato.equals(other.dataDoFato))
+			return false;
+		if (dataRegistroOcorrencia == null) {
+			if (other.dataRegistroOcorrencia != null)
+				return false;
+		} else if (!dataRegistroOcorrencia.equals(other.dataRegistroOcorrencia))
 			return false;
 		if (descricao == null) {
 			if (other.descricao != null)

@@ -21,8 +21,8 @@ public class Bicicleta {
 	private StatusBicicleta status;
 	
 	@ManyToOne
-	private Marca marca;
 	
+	private Marca marca;
 	@ManyToOne
 	private Modelo modelo;
 	
