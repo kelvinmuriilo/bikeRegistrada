@@ -1,6 +1,7 @@
 package com.bike.bikeRegistrada.modelo;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,11 +17,8 @@ public class Bicicleta {
 	private Long codigo;
 	private String ano;
 	
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private StatusBicicleta status;
-	
-	@ManyToOne
-	private Usuario usuario;
 	
 	@ManyToOne
 	private Marca marca;
@@ -28,16 +26,18 @@ public class Bicicleta {
 	@ManyToOne
 	private Modelo modelo;
 	
+	@ManyToOne
+	private Usuario usuario;
 	
 	
-	public Bicicleta(Long codigo, String ano, StatusBicicleta status, Usuario usuario, Marca marca,
-			Modelo modelo) {
+	public Bicicleta(Long codigo, String ano, StatusBicicleta status, Marca marca,
+			Modelo modelo, Usuario usuario) {
 		this.codigo = codigo;
 		this.ano = ano;
 		this.status = StatusBicicleta.SEM_RESTRICAO;
-		this.usuario = usuario;
 		this.marca = marca;
 		this.modelo = modelo;
+		this.usuario = usuario;
 	}
 	
 	public Long getCodigo() {
@@ -49,14 +49,16 @@ public class Bicicleta {
 	public StatusBicicleta getStatus() {
 		return status;
 	}
-	public Usuario getUsuario() {
-		return usuario;
-	}
+
 	public Marca getMarca() {
 		return marca;
 	}
 	public Modelo getModelo() {
 		return modelo;
+	}
+	
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
 	public void setStatus(StatusBicicleta status) {
@@ -114,8 +116,4 @@ public class Bicicleta {
 			return false;
 		return true;
 	}
-	
-	
-	
-
 }
