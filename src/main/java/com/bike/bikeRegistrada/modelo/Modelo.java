@@ -1,11 +1,11 @@
 package com.bike.bikeRegistrada.modelo;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
 
-import org.springframework.data.annotation.Id;
 
 @Entity
 public class Modelo {
@@ -16,17 +16,19 @@ public class Modelo {
 	
 	@ManyToOne
 	private Marca marca;
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public String getDescricao() {
 		return descricao;
 	}
+
 	public Marca getMarca() {
 		return marca;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -36,7 +38,7 @@ public class Modelo {
 		result = prime * result + ((marca == null) ? 0 : marca.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

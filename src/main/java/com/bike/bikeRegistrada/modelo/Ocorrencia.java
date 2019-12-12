@@ -3,13 +3,13 @@ package com.bike.bikeRegistrada.modelo;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
 
-import org.springframework.data.annotation.Id;
 
 @Entity
 public class Ocorrencia {
@@ -44,41 +44,45 @@ public class Ocorrencia {
 		this.dataDoFato = dataDoFato;
 		this.dataRegistroOcorrencia = LocalDateTime.now();
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public String getTitulo() {
 		return titulo;
 	}
+
 	public String getDescricao() {
 		return descricao;
 	}
-	public LocalDateTime getDataOcorrencia() {
+
+	public LocalDateTime getDataRegistroOcorrencia() {
 		return dataRegistroOcorrencia;
 	}
-	public Cidade getCidade() {
-		return cidade;
-	}
-	public Bairro getBairro() {
-		return bairro;
-	}
-	public TipoOcorrencia getTipo() {
-		return tipo;
-	}
-	public Bicicleta getBicicleta() {
-		return bicicleta;
-	}
-	public Usuario getUsuario() {
-		return usuario;
-	}
-	
+
 	public LocalDateTime getDataDoFato() {
 		return dataDoFato;
 	}
-	
-	public void setDataDoFato(LocalDateTime dataDoFato) {
-		this.dataDoFato = dataDoFato;
+
+	public TipoOcorrencia getTipo() {
+		return tipo;
+	}
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public Bairro getBairro() {
+		return bairro;
+	}
+
+	public Bicicleta getBicicleta() {
+		return bicicleta;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
 	@Override

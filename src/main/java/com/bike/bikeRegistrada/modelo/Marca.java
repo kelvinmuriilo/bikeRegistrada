@@ -1,13 +1,14 @@
 package com.bike.bikeRegistrada.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 
-import org.springframework.data.annotation.Id;
 
 @Entity
 public class Marca {
@@ -21,22 +22,32 @@ public class Marca {
 	
 	@OneToMany(mappedBy = "marca")
 	private List<Bicicleta> bicicletas;
-
 	
+	public Marca(Long id, String descricao, List<Modelo> modelos, List<Bicicleta> bicicletas) {
+		this.id = id;
+		this.descricao = descricao;
+		this.modelos = new ArrayList<Modelo>();
+		this.modelos = modelos;
+		this.bicicletas = new ArrayList<Bicicleta>();
+		this.bicicletas = bicicletas;
+	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public String getDescricao() {
 		return descricao;
 	}
+
 	public List<Modelo> getModelos() {
 		return modelos;
 	}
-	
+
 	public List<Bicicleta> getBicicletas() {
 		return bicicletas;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -47,7 +58,7 @@ public class Marca {
 		result = prime * result + ((modelos == null) ? 0 : modelos.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -79,7 +90,4 @@ public class Marca {
 			return false;
 		return true;
 	}
-	
-	
-	
 }

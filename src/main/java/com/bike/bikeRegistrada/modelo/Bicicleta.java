@@ -1,13 +1,18 @@
 package com.bike.bikeRegistrada.modelo;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-import org.springframework.data.annotation.Id;
 
 
 @Entity
@@ -21,49 +26,64 @@ public class Bicicleta {
 	private StatusBicicleta status;
 	
 	@ManyToOne
-	
-	private Marca marca;
-	@ManyToOne
 	private Modelo modelo;
 	
 	@ManyToOne
 	private Usuario usuario;
 	
+	@ManyToOne
+	private Marca marca;
 	
-	public Bicicleta(Long codigo, String ano, StatusBicicleta status, Marca marca,
-			Modelo modelo, Usuario usuario) {
+	@OneToMany(mappedBy = "bicicleta")
+	private List<Ocorrencia> ocorrencias;
+	
+	
+	public Bicicleta(Long codigo, String ano, StatusBicicleta status,
+			Modelo modelo, Usuario usuario, List<Ocorrencia> ocorrencias) {
 		this.codigo = codigo;
 		this.ano = ano;
 		this.status = StatusBicicleta.SEM_RESTRICAO;
-		this.marca = marca;
 		this.modelo = modelo;
 		this.usuario = usuario;
+		this.ocorrencias = new ArrayList<Ocorrencia>();
+		this.ocorrencias = ocorrencias;
 	}
-	
+
+
 	public Long getCodigo() {
 		return codigo;
 	}
+
+
 	public String getAno() {
 		return ano;
 	}
+
+
 	public StatusBicicleta getStatus() {
 		return status;
 	}
 
-	public Marca getMarca() {
-		return marca;
-	}
+
 	public Modelo getModelo() {
 		return modelo;
 	}
-	
+
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setStatus(StatusBicicleta status) {
-		this.status = status;
+
+	public Marca getMarca() {
+		return marca;
 	}
+
+
+	public List<Ocorrencia> getOcorrencias() {
+		return ocorrencias;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -73,10 +93,12 @@ public class Bicicleta {
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		result = prime * result + ((marca == null) ? 0 : marca.hashCode());
 		result = prime * result + ((modelo == null) ? 0 : modelo.hashCode());
+		result = prime * result + ((ocorrencias == null) ? 0 : ocorrencias.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -107,6 +129,11 @@ public class Bicicleta {
 				return false;
 		} else if (!modelo.equals(other.modelo))
 			return false;
+		if (ocorrencias == null) {
+			if (other.ocorrencias != null)
+				return false;
+		} else if (!ocorrencias.equals(other.ocorrencias))
+			return false;
 		if (status != other.status)
 			return false;
 		if (usuario == null) {
@@ -116,4 +143,6 @@ public class Bicicleta {
 			return false;
 		return true;
 	}
+	
+	
 }
