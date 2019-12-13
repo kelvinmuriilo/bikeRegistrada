@@ -22,4 +22,15 @@ insert into modelo
   (descricao, marca_id)
 values
   ('City Tour Sport', 1);
+
+insert into bicicleta
+  (ano, status, marca_id, modelo_id, usuario_cpf)
+values
+  ('2018', 'SEM_RESTRICAO', 1, 1, 1);
+
+insert into ocorrencia
+  (data_do_fato, data_registro_ocorrencia, descricao, tipo, titulo, bairro_id, bicicleta_codigo, cidade_id, usuario_cpf)
+VALUES
+  ('2018-05-20 18:00:00', '2018-05-21 18:00:00', 'Assalto', 'ROUBO', 'Assalto', 1, 1, 1, 1);
+
   
