@@ -36,14 +36,18 @@ public class Ocorrencia {
 	@ManyToOne
 	private Usuario usuario;
 	
-	public Ocorrencia(Long id, String titulo, String descricao, LocalDateTime dataOcorrencia, 
-			Cidade cidade, Bairro bairro, LocalDateTime dataDoFato) {
-		this.id = id;
+	public Ocorrencia(String titulo, String descricao, 
+			Cidade cidade, Bairro bairro, Bicicleta bicicleta, LocalDateTime dataDoFato) {
 		this.titulo = titulo;
 		this.descricao = descricao;
+		this.cidade = cidade;
+		this.bairro = bairro;
+		this.bicicleta = bicicleta;
 		this.dataDoFato = dataDoFato;
 		this.dataRegistroOcorrencia = LocalDateTime.now();
 	}
+	
+	public Ocorrencia() {}
 
 	public Long getId() {
 		return id;

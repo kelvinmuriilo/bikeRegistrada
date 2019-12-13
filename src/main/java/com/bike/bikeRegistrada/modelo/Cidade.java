@@ -1,5 +1,6 @@
 package com.bike.bikeRegistrada.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -18,6 +19,14 @@ public class Cidade {
 	
 	@OneToMany(mappedBy ="cidade")
 	private List<Bairro> bairros;
+	
+	public Cidade() {}
+
+	public Cidade(String descricao, String sigla) {
+		this.descricao = descricao;
+		this.sigla = sigla;
+		this.bairros  = new ArrayList<>();
+	}
 
 	public Long getId() {
 		return id;

@@ -28,6 +28,13 @@ public class Modelo {
 	public Marca getMarca() {
 		return marca;
 	}
+	
+	public Modelo() {}
+	
+	public Modelo(String descricao, Marca marca) {
+		this.descricao = descricao;
+		this.marca = marca;
+	}
 
 	@Override
 	public int hashCode() {

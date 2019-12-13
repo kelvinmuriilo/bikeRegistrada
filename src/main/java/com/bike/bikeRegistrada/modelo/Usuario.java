@@ -23,16 +23,15 @@ public class Usuario {
 	
 	@OneToMany(mappedBy = "usuario")
 	private List<Bicicleta> bicicletas;
+	
+	public Usuario() {}
 
-	public Usuario(Long cpf, String nome, LocalDateTime dataDeNascimento, List<Ocorrencia> ocorrencias,
-			List<Bicicleta> bicicletas) {
-		super();
+	public Usuario(Long cpf, String nome, LocalDateTime dataDeNascimento) {
 		this.cpf = cpf;
 		this.nome = nome;
 		this.dataDeNascimento = dataDeNascimento;
-		this.ocorrencias = ocorrencias;
-		this.bicicletas = new ArrayList<Bicicleta>();
-		this.bicicletas = bicicletas;
+		this.ocorrencias = new ArrayList<>();
+		this.bicicletas = new ArrayList<>();
 	}
 
 	public Long getCpf() {

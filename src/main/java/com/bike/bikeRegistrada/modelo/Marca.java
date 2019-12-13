@@ -23,13 +23,12 @@ public class Marca {
 	@OneToMany(mappedBy = "marca")
 	private List<Bicicleta> bicicletas;
 	
-	public Marca(Long id, String descricao, List<Modelo> modelos, List<Bicicleta> bicicletas) {
-		this.id = id;
+	public Marca() {}
+	
+	public Marca( String descricao) {
 		this.descricao = descricao;
-		this.modelos = new ArrayList<Modelo>();
-		this.modelos = modelos;
-		this.bicicletas = new ArrayList<Bicicleta>();
-		this.bicicletas = bicicletas;
+		this.modelos = new ArrayList<>();
+		this.bicicletas = new ArrayList<>();
 	}
 
 	public Long getId() {

@@ -37,6 +37,7 @@ public class Bicicleta {
 	@OneToMany(mappedBy = "bicicleta")
 	private List<Ocorrencia> ocorrencias;
 	
+	public Bicicleta() {}
 	
 	public Bicicleta(Long codigo, String ano, StatusBicicleta status,
 			Modelo modelo, Usuario usuario, List<Ocorrencia> ocorrencias) {

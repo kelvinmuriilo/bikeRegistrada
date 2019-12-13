@@ -34,6 +34,8 @@ public class OcorrenciaDto {
 		this.tipo = ocorrencia.getTipo();
 	}
 	
+	public OcorrenciaDto() {}
+	
 	public Long getId() {
 		return id;
 	}
