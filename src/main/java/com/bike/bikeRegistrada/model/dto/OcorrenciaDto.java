@@ -21,19 +21,17 @@ public class OcorrenciaDto {
 	private TipoOcorrencia tipo;
 	
 	
-	public OcorrenciaDto(Long id, String titulo, String descricao, String descricaoCidade, String descricaoBairro,
-			String bicicleta, String nomeUsuario, LocalDateTime dataRegistroOcorrencia, LocalDateTime dataDoFato,
-			TipoOcorrencia tipo) {
-		this.id = id;
-		this.titulo = titulo;
-		this.descricao = descricao;
-		this.descricaoCidade = descricaoCidade;
-		this.descricaoBairro = descricaoBairro;
-		this.bicicleta = bicicleta;
-		this.nomeUsuario = nomeUsuario;
-		this.dataRegistroOcorrencia = dataRegistroOcorrencia;
-		this.dataDoFato = dataDoFato;
-		this.tipo = tipo;
+	public OcorrenciaDto(Ocorrencia ocorrencia) {
+		this.id = ocorrencia.getId();
+		this.titulo = ocorrencia.getTitulo();
+		this.descricao = ocorrencia.getDescricao();
+		this.descricaoCidade = ocorrencia.getCidade().getDescricao();
+		this.descricaoBairro = ocorrencia.getBairro().getDescricao();
+		this.bicicleta = ocorrencia.getBicicleta().getModelo().getDescricao();
+		this.nomeUsuario = ocorrencia.getUsuario().getNome();
+		this.dataRegistroOcorrencia = ocorrencia.getDataRegistroOcorrencia();
+		this.dataDoFato = ocorrencia.getDataDoFato();
+		this.tipo = ocorrencia.getTipo();
 	}
 	
 	public Long getId() {
@@ -68,7 +66,9 @@ public class OcorrenciaDto {
 	}
 	
 	public static List<OcorrenciaDto> converter(List<Ocorrencia> ocorrencias){
-		return ocorrencias.stream().map(OcorrenciaDto::new).collect(Collectors.toList());
+		return ocorrencias.stream()
+				.map(OcorrenciaDto::new)
+				.collect(Collectors.toList());
 	}
 	
 	
