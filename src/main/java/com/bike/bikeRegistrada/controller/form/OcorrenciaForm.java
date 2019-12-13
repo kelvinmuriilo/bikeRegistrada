@@ -18,27 +18,28 @@ import com.bike.bikeRegistrada.repository.BicicletaRepository;
 
 public class OcorrenciaForm {
 	
-	@NotNull @NotEmpty
+	@NotNull 
 	private LocalDateTime dataDoFato;
 	@NotNull @NotEmpty @Length(min = 5)
 	private String descricao;
 	@NotNull @NotEmpty @Length(min = 5)
 	private String titulo;
-	@NotNull @NotEmpty
+	@NotNull 
 	private TipoOcorrencia tipo;
-	@NotNull @NotEmpty
+	@NotNull 
 	private String descricaoBairro;
-	@NotNull @NotEmpty
+	@NotNull 
 	private Long codigoBicicleta;
 		
+	
+	public OcorrenciaForm() {}
+	
 	public LocalDateTime getDataDoFato() {
 		return dataDoFato;
 	}
-	public void setDataDoFato(String dataDoFato) {
-
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-		LocalDateTime dateTime = LocalDateTime.parse(dataDoFato, formatter);
-		this.dataDoFato = dateTime;
+	public void setDataDoFato(String strData) {
+		LocalDateTime  data = converterStrToDate(strData);
+		this.dataDoFato = data;
 	}
 	public String getDescricao() {
 		return descricao;
@@ -76,6 +77,12 @@ public class OcorrenciaForm {
 		Cidade cidade = bairro.getCidade();
 		Bicicleta bicicleta = bicicletaRepo.findByCodigo(codigoBicicleta);
 		
-		return new Ocorrencia(titulo, descricao, cidade, bairro, bicicleta, dataDoFato);
+		return new Ocorrencia(titulo, descricao, cidade, bairro, bicicleta, dataDoFato, tipo);
+	}
+	
+	public LocalDateTime converterStrToDate(String data) {
+		DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+		LocalDateTime dateTime = LocalDateTime.parse(data, formatter);
+		return dateTime;
 	}
 }

@@ -25,17 +25,17 @@ public class OcorrenciaDto {
 		this.id = ocorrencia.getId();
 		this.titulo = ocorrencia.getTitulo();
 		this.descricao = ocorrencia.getDescricao();
-		this.descricaoCidade = ocorrencia.getCidade().getDescricao();
+		this.descricaoCidade = ocorrencia.getBairro().getCidade().getDescricao();
 		this.descricaoBairro = ocorrencia.getBairro().getDescricao();
 		this.bicicleta = ocorrencia.getBicicleta().getModelo().getDescricao();
-		this.nomeUsuario = ocorrencia.getUsuario().getNome();
-		this.dataRegistroOcorrencia = ocorrencia.getDataRegistroOcorrencia();
 		this.dataDoFato = ocorrencia.getDataDoFato();
+		this.dataRegistroOcorrencia = ocorrencia.getDataRegistroOcorrencia();
 		this.tipo = ocorrencia.getTipo();
+		this.descricaoCidade = ocorrencia.getBairro().getCidade().getDescricao();
 	}
 	
 	public OcorrenciaDto() {}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -72,7 +72,4 @@ public class OcorrenciaDto {
 				.map(OcorrenciaDto::new)
 				.collect(Collectors.toList());
 	}
-	
-	
-	
 }

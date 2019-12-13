@@ -21,7 +21,7 @@ values
 insert into modelo
   (descricao, marca_id)
 values
-  ('City Tour Sport', 1);
+  ('Aspen', 1);
 
 
 

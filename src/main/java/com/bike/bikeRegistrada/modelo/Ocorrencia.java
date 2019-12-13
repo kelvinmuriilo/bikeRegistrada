@@ -18,7 +18,7 @@ public class Ocorrencia {
 	private Long id;
 	private String titulo;
 	private String descricao;
-	private LocalDateTime dataRegistroOcorrencia;
+	private LocalDateTime dataRegistroOcorrencia = LocalDateTime.now();
 	private LocalDateTime dataDoFato;
 	
 	@Enumerated(EnumType.STRING)
@@ -37,7 +37,7 @@ public class Ocorrencia {
 	private Usuario usuario;
 	
 	public Ocorrencia(String titulo, String descricao, 
-			Cidade cidade, Bairro bairro, Bicicleta bicicleta, LocalDateTime dataDoFato) {
+			Cidade cidade, Bairro bairro, Bicicleta bicicleta, LocalDateTime dataDoFato, TipoOcorrencia tipo) {
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.cidade = cidade;
@@ -45,6 +45,7 @@ public class Ocorrencia {
 		this.bicicleta = bicicleta;
 		this.dataDoFato = dataDoFato;
 		this.dataRegistroOcorrencia = LocalDateTime.now();
+		this.tipo = tipo;
 	}
 	
 	public Ocorrencia() {}
