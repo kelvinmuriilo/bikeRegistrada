@@ -80,6 +80,9 @@ public class Bicicleta {
 		return marca;
 	}
 
+	public void setStatus(StatusBicicleta status) {
+		this.status = status;
+	}
 
 	public List<Ocorrencia> getOcorrencias() {
 		return ocorrencias;
