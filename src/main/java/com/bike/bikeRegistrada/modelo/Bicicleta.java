@@ -40,16 +40,15 @@ public class Bicicleta {
 	public Bicicleta() {}
 	
 	public Bicicleta(Long codigo, String ano, StatusBicicleta status,
-			Modelo modelo, Usuario usuario, List<Ocorrencia> ocorrencias) {
+			Modelo modelo, Usuario usuario) {
 		this.codigo = codigo;
 		this.ano = ano;
 		this.status = StatusBicicleta.SEM_RESTRICAO;
 		this.modelo = modelo;
 		this.usuario = usuario;
 		this.ocorrencias = new ArrayList<Ocorrencia>();
-		this.ocorrencias = ocorrencias;
 	}
-
+	
 
 	public Long getCodigo() {
 		return codigo;
