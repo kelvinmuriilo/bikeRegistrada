@@ -2,6 +2,7 @@ package com.bike.bikeRegistrada.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,9 +38,18 @@ public class OcorrenciaController {
 	private BairroRepository bairroRepository;
 	
 	@GetMapping
-	public List<OcorrenciaDto> lista() {
+	public List<OcorrenciaDto> listar() {
 		List<Ocorrencia> ocorrencias = ocorrenciaRepository.findAll();
 		return OcorrenciaDto.converter(ocorrencias);
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<OcorrenciaDto> listarUmaOcorrencia(@PathVariable Long id) {
+		Optional<Ocorrencia> ocorrencia = ocorrenciaRepository.findById(id);
+		if(ocorrencia.isPresent()) {
+			return ResponseEntity.ok(new OcorrenciaDto(ocorrencia.get()));
+		}
+		return ResponseEntity.notFound().build();
 	}
 	
 	@PostMapping
@@ -49,6 +60,5 @@ public class OcorrenciaController {
 		
 		URI uri = uriBuilder.path("/ocorrencias/{id}").buildAndExpand(ocorrencia.getId()).toUri();
 		return ResponseEntity.created(uri).body(new OcorrenciaDto(ocorrencia));
-		
 	}
 }
