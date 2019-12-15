@@ -94,6 +94,17 @@ public class Bicicleta {
 		return ocorrencias;
 	}
 
+	public void setAno(String ano) {
+		this.ano = ano;
+	}
+
+	public void setModelo(Modelo modelo) {
+		this.modelo = modelo;
+	}
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
 
 	@Override
 	public int hashCode() {

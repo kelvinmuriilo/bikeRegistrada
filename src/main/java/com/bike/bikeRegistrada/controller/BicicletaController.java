@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -57,6 +58,22 @@ public class BicicletaController {
 		
 		URI uri = uriBuilder.path("/bicicletas/{id}").buildAndExpand(bicicleta.getCodigo()).toUri();
 		return ResponseEntity.created(uri).body(new BicicletaDto(bicicleta));
+	}
+	
+	@PutMapping("/{codigo}")
+	@Transactional
+	public ResponseEntity<BicicletaDto> atualizar(@RequestBody @Valid BicicletaForm form, @PathVariable("codigo") Long codigo){
+		Bicicleta bicicleta = bicicletaRepository.findByCodigo(codigo);
+		
+		if(bicicleta != null) {
+			Bicicleta bicicletaAtualizada = form.atualizar(bicicleta, modeloRepository);
+			
+			if(bicicletaAtualizada != null) {
+				return ResponseEntity.ok(new BicicletaDto(bicicletaAtualizada));
+			}
+		}
+		
+		return ResponseEntity.notFound().build();
 	}
 
 }

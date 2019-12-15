@@ -1,19 +1,28 @@
 package com.bike.bikeRegistrada.controller.form;
 
+import java.util.Optional;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.bike.bikeRegistrada.modelo.Bicicleta;
 import com.bike.bikeRegistrada.modelo.Modelo;
 import com.bike.bikeRegistrada.repository.ModeloRepository;
 
 public class BicicletaForm {
 	
+	@NotNull @Size(min = 4, max=4)
 	private String ano;
-	private Long idModelo;
-	private Long idMarca;
 	
-	public BicicletaForm(String ano, Long idModelo, Long idMarca) {
+	@NotNull
+	private Long idModelo;
+	
+
+	
+	public BicicletaForm(String ano, Long idModelo) {
 		this.ano = ano;
 		this.idModelo = idModelo;
-		this.idMarca = idMarca;
+		
 	}
 	
 	public BicicletaForm() {}
@@ -34,16 +43,25 @@ public class BicicletaForm {
 		this.idModelo = idModelo;
 	}
 
-	public Long getIdMarca() {
-		return idMarca;
-	}
-
-	public void setIdMarca(Long idMarca) {
-		this.idMarca = idMarca;
-	}
+	
+	
 	
 	public Bicicleta converter(ModeloRepository modeloRepository) {
 		Modelo modelo = modeloRepository.getOne(idModelo);
 		return new Bicicleta(ano, modelo);
+	}
+	
+	public Bicicleta atualizar(Bicicleta bicicleta, ModeloRepository modeloRepository) {
+		Optional<Modelo> modelo = modeloRepository.findById(idModelo);
+		
+		if(modelo.isPresent()) {
+			bicicleta.setAno(ano);
+			bicicleta.setModelo(modelo.get());
+			bicicleta.setMarca(modelo.get().getMarca());
+			
+			return bicicleta;
+		}
+		
+		return null;
 	}
 }
