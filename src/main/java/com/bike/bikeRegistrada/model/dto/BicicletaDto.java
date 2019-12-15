@@ -1,4 +1,4 @@
-package com.bike.bikeRegistrada.controller.dto;
+package com.bike.bikeRegistrada.model.dto;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +12,6 @@ public class BicicletaDto {
 	private String ano;
 	private String descricaoModelo;
 	private String descricaoMarca;
-	private String nomeUsuario;
 	private StatusBicicleta status;
 	
 	public BicicletaDto(){}
@@ -23,7 +22,6 @@ public class BicicletaDto {
 		this.ano = bicicleta.getAno();
 		this.descricaoModelo = bicicleta.getModelo().getDescricao();
 		this.descricaoMarca = bicicleta.getModelo().getMarca().getDescricao();
-		this.nomeUsuario = bicicleta.getUsuario().getNome();
 		this.status = bicicleta.getStatus();
 	}
 	public Long getCodigo() {
@@ -37,9 +35,6 @@ public class BicicletaDto {
 	}
 	public String getDescricaoMarca() {
 		return descricaoMarca;
-	}
-	public String getNomeUsuario() {
-		return nomeUsuario;
 	}
 	public StatusBicicleta getStatus() {
 		return status;
