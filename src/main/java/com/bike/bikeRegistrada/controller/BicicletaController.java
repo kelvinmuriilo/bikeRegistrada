@@ -2,7 +2,6 @@ package com.bike.bikeRegistrada.controller;
 
 import java.net.URI;
 import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.bike.bikeRegistrada.controller.form.BicicletaForm;
 import com.bike.bikeRegistrada.model.dto.BicicletaDto;
+import com.bike.bikeRegistrada.model.dto.OcorrenciaDto;
 import com.bike.bikeRegistrada.modelo.Bicicleta;
+import com.bike.bikeRegistrada.modelo.Ocorrencia;
 import com.bike.bikeRegistrada.repository.BicicletaRepository;
 import com.bike.bikeRegistrada.repository.ModeloRepository;
 
@@ -49,6 +50,16 @@ public class BicicletaController {
 		}
 		
 		return ResponseEntity.notFound().build();
+	}
+	
+	@GetMapping("listar-ocorrencias/{codigo}")
+	public List<OcorrenciaDto> listarOcorrenciasBike(@PathVariable("codigo") Long codigo) {
+		Bicicleta bicicleta = bicicletaRepository.findByCodigo(codigo);
+		if(bicicleta != null) {
+			List<Ocorrencia> ocorrenciasBicicleta = bicicleta.getOcorrencias();
+			return OcorrenciaDto.converter(ocorrenciasBicicleta); 
+		}
+		return null;
 	}
 	
 	@PostMapping
