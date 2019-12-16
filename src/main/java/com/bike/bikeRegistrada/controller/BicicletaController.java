@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -71,6 +72,19 @@ public class BicicletaController {
 			if(bicicletaAtualizada != null) {
 				return ResponseEntity.ok(new BicicletaDto(bicicletaAtualizada));
 			}
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	
+	@DeleteMapping("/{codigo}")
+	@Transactional
+	public ResponseEntity<BicicletaDto> deletar(@PathVariable("codigo") Long codigo) {
+		Bicicleta bicicleta = bicicletaRepository.findByCodigo(codigo);
+		
+		if(bicicleta != null) {
+			bicicletaRepository.delete(bicicleta);
+			return ResponseEntity.ok().build();
 		}
 		
 		return ResponseEntity.notFound().build();
