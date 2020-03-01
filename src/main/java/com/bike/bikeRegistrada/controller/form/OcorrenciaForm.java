@@ -8,14 +8,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.bike.bikeRegistrada.modelo.Bairro;
-import com.bike.bikeRegistrada.modelo.Bicicleta;
-import com.bike.bikeRegistrada.modelo.Cidade;
-import com.bike.bikeRegistrada.modelo.Ocorrencia;
-import com.bike.bikeRegistrada.modelo.StatusBicicleta;
 import com.bike.bikeRegistrada.modelo.TipoOcorrencia;
-import com.bike.bikeRegistrada.repository.BairroRepository;
-import com.bike.bikeRegistrada.repository.BicicletaRepository;
 
 public class OcorrenciaForm {
 	
@@ -72,14 +65,6 @@ public class OcorrenciaForm {
 	}
 	public void setCodigoBicicleta(Long codigoBicicleta) {
 		this.codigoBicicleta = codigoBicicleta;
-	}
-	public  Ocorrencia converter(BicicletaRepository bicicletaRepo, BairroRepository bairroRepo) {
-		Bairro bairro = bairroRepo.findByDescricao(descricaoBairro);
-		Cidade cidade = bairro.getCidade();
-		Bicicleta bicicleta = bicicletaRepo.findByCodigo(codigoBicicleta);
-		bicicleta.setStatus(StatusBicicleta.valueOf(tipo.name()));
-		
-		return new Ocorrencia(titulo, descricao, cidade, bairro, bicicleta, dataDoFato, tipo);
 	}
 	
 	public LocalDateTime converterStrToDate(String data) {

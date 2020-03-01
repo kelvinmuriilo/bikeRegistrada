@@ -18,9 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bike.bikeRegistrada.controller.form.OcorrenciaForm;
 import com.bike.bikeRegistrada.model.dto.OcorrenciaDto;
 import com.bike.bikeRegistrada.modelo.Ocorrencia;
-import com.bike.bikeRegistrada.repository.BairroRepository;
-import com.bike.bikeRegistrada.repository.BicicletaRepository;
 import com.bike.bikeRegistrada.repository.OcorrenciaRepository;
+import com.bike.bikeRegistrada.servico.OcorrenciaServico;
 
 @RestController
 @RequestMapping("/ocorrencias")
@@ -30,10 +29,7 @@ public class OcorrenciaController {
 	private OcorrenciaRepository ocorrenciaRepository;
 	
 	@Autowired
-	private BicicletaRepository bicicletaRepository;
-	
-	@Autowired
-	private BairroRepository bairroRepository;
+	private OcorrenciaServico ocorrenciaServico;
 	
 	@GetMapping
 	public List<OcorrenciaDto> listar() {
@@ -53,9 +49,7 @@ public class OcorrenciaController {
 	@PostMapping
 	@Transactional
 	public ResponseEntity<String> cadastrar(@RequestBody @Valid OcorrenciaForm form) {
-		Ocorrencia ocorrencia = form.converter(bicicletaRepository, bairroRepository);
-		ocorrenciaRepository.save(ocorrencia);
-		
+		ocorrenciaServico.cadastrarOcorrencia(form);
 		return ResponseEntity.ok("Ocorrência registrada com sucesso!");
 	}
 }
