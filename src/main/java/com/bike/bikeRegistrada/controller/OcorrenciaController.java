@@ -1,7 +1,6 @@
 package com.bike.bikeRegistrada.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -38,12 +37,8 @@ public class OcorrenciaController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<OcorrenciaDto> listarUmaOcorrencia(@PathVariable Long id) {
-		Optional<Ocorrencia> ocorrencia = ocorrenciaRepository.findById(id);
-		if(ocorrencia.isPresent()) {
-			return ResponseEntity.ok(new OcorrenciaDto(ocorrencia.get()));
-		}
-		return ResponseEntity.notFound().build();
+	public OcorrenciaDto listarUmaOcorrencia(@PathVariable Long id) {
+		return ocorrenciaServico.listarUmaOcorrencia(id);
 	}
 	
 	@PostMapping
