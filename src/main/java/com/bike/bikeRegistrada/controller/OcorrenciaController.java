@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bike.bikeRegistrada.controller.form.OcorrenciaForm;
 import com.bike.bikeRegistrada.model.dto.OcorrenciaDto;
-import com.bike.bikeRegistrada.modelo.Ocorrencia;
-import com.bike.bikeRegistrada.repository.OcorrenciaRepository;
 import com.bike.bikeRegistrada.servico.OcorrenciaServico;
 
 @RestController
@@ -25,20 +23,16 @@ import com.bike.bikeRegistrada.servico.OcorrenciaServico;
 public class OcorrenciaController {
 	
 	@Autowired
-	private OcorrenciaRepository ocorrenciaRepository;
-	
-	@Autowired
 	private OcorrenciaServico ocorrenciaServico;
 	
 	@GetMapping
-	public List<OcorrenciaDto> listar() {
-		List<Ocorrencia> ocorrencias = ocorrenciaRepository.findAll();
-		return OcorrenciaDto.converter(ocorrencias);
+	public ResponseEntity<List<OcorrenciaDto>> listar() {
+		return ResponseEntity.ok(ocorrenciaServico.listarOcorrencias());
 	}
 	
 	@GetMapping("/{id}")
-	public OcorrenciaDto listarUmaOcorrencia(@PathVariable Long id) {
-		return ocorrenciaServico.listarUmaOcorrencia(id);
+	public ResponseEntity<OcorrenciaDto> listarUmaOcorrencia(@PathVariable Long id) {
+		return ResponseEntity.ok(ocorrenciaServico.listarUmaOcorrencia(id));
 	}
 	
 	@PostMapping

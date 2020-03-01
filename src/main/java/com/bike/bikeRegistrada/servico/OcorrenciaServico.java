@@ -1,5 +1,6 @@
 package com.bike.bikeRegistrada.servico;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -101,5 +102,20 @@ public class OcorrenciaServico {
 		} else {
 			throw new ExcecaoAplicacao("Nenhuma ocorrência foi encontrada.");
 		}
+	}
+	
+	
+	/**
+	 * Retorna uma lista com todas as ocorrências cadastradas.
+	 * 
+	 * @return 				 -	Lista com ocorrências cadastradas 
+	 * 							{@link List<OcorrenciaDto>}
+	 *                           
+	 * @author            		Kelvin Murilo
+	 */
+	
+	public List<OcorrenciaDto> listarOcorrencias(){
+		List<Ocorrencia> ocorrencias =  ocorrenciaRepo.findAll();
+		return OcorrenciaDto.converter(ocorrencias);
 	}
 }
