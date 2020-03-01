@@ -23,7 +23,7 @@ import com.bike.bikeRegistrada.model.dto.OcorrenciaDto;
 import com.bike.bikeRegistrada.modelo.Bicicleta;
 import com.bike.bikeRegistrada.modelo.Ocorrencia;
 import com.bike.bikeRegistrada.repository.BicicletaRepository;
-import com.bike.bikeRegistrada.repository.ModeloRepository;
+import com.bike.bikeRegistrada.repository.ModeloBicicletaRepository;
 
 @RestController
 @RequestMapping("/bicicletas")
@@ -33,7 +33,7 @@ public class BicicletaController {
 	private BicicletaRepository bicicletaRepository;
 	
 	@Autowired
-	private ModeloRepository modeloRepository;
+	private ModeloBicicletaRepository modeloRepository;
 	
 	@GetMapping
 	public List<BicicletaDto> listar(){

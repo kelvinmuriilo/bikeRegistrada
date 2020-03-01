@@ -1,6 +1,5 @@
 package com.bike.bikeRegistrada.controller;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import com.bike.bikeRegistrada.controller.form.OcorrenciaForm;
 import com.bike.bikeRegistrada.model.dto.OcorrenciaDto;
@@ -54,11 +52,10 @@ public class OcorrenciaController {
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<OcorrenciaDto> cadastrar(@RequestBody @Valid OcorrenciaForm form, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<String> cadastrar(@RequestBody @Valid OcorrenciaForm form) {
 		Ocorrencia ocorrencia = form.converter(bicicletaRepository, bairroRepository);
 		ocorrenciaRepository.save(ocorrencia);
 		
-		URI uri = uriBuilder.path("/ocorrencias/{id}").buildAndExpand(ocorrencia.getId()).toUri();
-		return ResponseEntity.created(uri).body(new OcorrenciaDto(ocorrencia));
+		return ResponseEntity.ok("Ocorrência registrada com sucesso!");
 	}
 }

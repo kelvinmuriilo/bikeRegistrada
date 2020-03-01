@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 
 import com.bike.bikeRegistrada.modelo.Bicicleta;
 import com.bike.bikeRegistrada.modelo.Modelo;
-import com.bike.bikeRegistrada.repository.ModeloRepository;
+import com.bike.bikeRegistrada.repository.ModeloBicicletaRepository;
 
 public class BicicletaForm {
 	
@@ -46,12 +46,12 @@ public class BicicletaForm {
 	
 	
 	
-	public Bicicleta converter(ModeloRepository modeloRepository) {
+	public Bicicleta converter(ModeloBicicletaRepository modeloRepository) {
 		Modelo modelo = modeloRepository.getOne(idModelo);
 		return new Bicicleta(ano, modelo);
 	}
 	
-	public Bicicleta atualizar(Bicicleta bicicleta, ModeloRepository modeloRepository) {
+	public Bicicleta atualizar(Bicicleta bicicleta, ModeloBicicletaRepository modeloRepository) {
 		Optional<Modelo> modelo = modeloRepository.findById(idModelo);
 		
 		if(modelo.isPresent()) {
