@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,9 +30,9 @@ public class OcorrenciaController {
 	private OcorrenciaServico ocorrenciaServico;
 	
 	@GetMapping
-	public ResponseEntity<Page<OcorrenciaDto>> listar(@RequestParam(required=true) 
-		int pagina, int qtdPorPagina) {
-		Pageable paginacao = PageRequest.of(pagina, qtdPorPagina);
+	public ResponseEntity<Page<OcorrenciaDto>> listar(
+		@PageableDefault(sort = "id", direction = Direction.ASC)
+		Pageable paginacao) {
 		return ResponseEntity.ok(ocorrenciaServico.listarOcorrencias(paginacao));
 	}
 	
