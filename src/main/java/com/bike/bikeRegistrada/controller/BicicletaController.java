@@ -52,7 +52,7 @@ public class BicicletaController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@GetMapping("listar-ocorrencias/{codigo}")
+	/*@GetMapping("listar-ocorrencias/{codigo}")
 	public List<OcorrenciaDto> listarOcorrenciasBike(@PathVariable("codigo") Long codigo) {
 		Bicicleta bicicleta = bicicletaRepository.findByCodigo(codigo);
 		if(bicicleta != null) {
@@ -60,7 +60,7 @@ public class BicicletaController {
 			return OcorrenciaDto.converter(ocorrenciasBicicleta); 
 		}
 		return null;
-	}
+	}*/
 	
 	@PostMapping
 	@Transactional

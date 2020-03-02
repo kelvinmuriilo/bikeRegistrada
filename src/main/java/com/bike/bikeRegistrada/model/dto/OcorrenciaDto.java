@@ -1,8 +1,8 @@
 package com.bike.bikeRegistrada.model.dto;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
+
+import org.springframework.data.domain.Page;
 
 import com.bike.bikeRegistrada.modelo.Ocorrencia;
 import com.bike.bikeRegistrada.modelo.TipoOcorrencia;
@@ -67,9 +67,7 @@ public class OcorrenciaDto {
 		return tipo;
 	}
 	
-	public static List<OcorrenciaDto> converter(List<Ocorrencia> ocorrencias){
-		return ocorrencias.stream()
-				.map(OcorrenciaDto::new)
-				.collect(Collectors.toList());
+	public static Page<OcorrenciaDto> converter(Page<Ocorrencia> ocorrencias){
+		return ocorrencias.map(OcorrenciaDto::new);
 	}
 }

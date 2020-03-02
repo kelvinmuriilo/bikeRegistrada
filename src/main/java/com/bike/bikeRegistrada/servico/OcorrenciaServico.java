@@ -1,6 +1,5 @@
 package com.bike.bikeRegistrada.servico;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -9,8 +8,11 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bike.bikeRegistrada.controller.form.OcorrenciaForm;
 import com.bike.bikeRegistrada.excecao.ExcecaoNegocio;
@@ -108,14 +110,18 @@ public class OcorrenciaServico {
 	/**
 	 * Retorna uma lista com todas as ocorrências cadastradas.
 	 * 
-	 * @return 				 -	Lista com ocorrências cadastradas 
-	 * 							{@link List<OcorrenciaDto>}
+	 * @param paginacao	    - Objeto que contém os dados para paginação
+	 * 							{@link Pageable}}
+	 * 
+	 * 
+	 * @return 				 -	Lista paginada com ocorrências cadastradas 
+	 * 							{@link Page<OcorrenciaDto>}
 	 *                           
 	 * @author            		Kelvin Murilo
 	 */
 	
-	public List<OcorrenciaDto> listarOcorrencias(){
-		List<Ocorrencia> ocorrencias =  ocorrenciaRepo.findAll();
+	public Page<OcorrenciaDto> listarOcorrencias(@RequestParam(required=true) Pageable paginacao){
+		Page<Ocorrencia> ocorrencias =  ocorrenciaRepo.findAll(paginacao);
 		return OcorrenciaDto.converter(ocorrencias);
 	}
 }
