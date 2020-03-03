@@ -3,6 +3,8 @@ package com.bike.bikeRegistrada.model.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+
 import com.bike.bikeRegistrada.modelo.Bicicleta;
 import com.bike.bikeRegistrada.modelo.StatusBicicleta;
 
@@ -40,9 +42,13 @@ public class BicicletaDto {
 		return status;
 	}
 	
-	public static List<BicicletaDto> converter(List<Bicicleta> bicicletas) {
+	public static List<BicicletaDto> converterToList(List<Bicicleta> bicicletas) {
 		return  bicicletas.stream()
 				.map(BicicletaDto::new)
 				.collect(Collectors.toList());
+	}
+	
+	public static Page<BicicletaDto> converterToPage(Page<Bicicleta> bicicletas){
+		return bicicletas.map(BicicletaDto::new);
 	}
 }
